@@ -42,9 +42,6 @@ type Move = (Tabuleiro, Jogadores)
 
 -- ********* Parte de Movimentacao **********
 
--- Decide se move ou nao, recebe como parametro a coordenada atual do personagem e qual a direcao desejada por char, 
--- entao tais variaveis sao encaminhadas para outra funcao que ira vefificar se existe conteudo nela ou nao, retornando um Bool
-
 -- Cria o mapa e os jogadores
 primeiroMovimento :: Move
 primeiroMovimento = (gerarTabuleiro, (introJogadores (gerarTabuleiro)))
@@ -69,7 +66,7 @@ direcao (iD,x,y,cap) c  | (c == 'N') =  (x+1, y)
                         | (c == 'O') =  (x, y-1) 
 
 
--- verifica se mov possivel recebe a coordenada e o tabuleiro 
+-- verifica se mov é possivel recebe a coordenada e o tabuleiro 
 
 possivelMovimento :: (Int,Int) -> Tabuleiro -> Char
 possivelMovimento (x,y) (l0,l1,l2,l3,l4,l5,l6,l7)   | x == 0 = (verificaLinha y l0) 
@@ -164,7 +161,7 @@ prioridadeCelula (x,y,c)  | cabeça == 'g' && (head cauda == 'a' ||  head cauda 
 
 -- ************ Crição dos Jogadores ***************
 
--- Introduz os jogadoes no jogo com uma movimentação diferenciada para que crie o mapa uma menor quantidade de vezes
+-- Introduz os jogadores no jogo com uma movimentação diferenciada, para que crie o mapa uma menor quantidade de vezes
 
 introJogadores :: Tabuleiro -> Jogadores
 introJogadores (linha0,linha1,linha2,linha3,linha4,linha5,linha6,linha7)  = (jogador1, jogador2, jogador3, jogador4)
