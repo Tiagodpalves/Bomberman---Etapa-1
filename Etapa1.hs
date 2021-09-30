@@ -20,7 +20,9 @@ Alunos : Tiago de Paula Alves (12011BCC040)
 
 - Criar o tabuleiro : cria as linhas e as linhas criam as celulas 
 
--Movimentação do Persongem  : pega um personagem (1 a 4) e pega as informações dele assim como a direção desejada verifica se ela é possivel (caso seja o tabuleiro muda se tiver um presente no local se for apenas grama nao muda) e caso seja realiza o movimento e coleta o presente e incrementa sua posição nas capacidades, e é retornado um movimento que é uma tupla que contem o atual tabuleiro e Jogadores
+-Movimentação do Persongem  : pega um personagem (1 a 4) e pega as informações dele assim como a direção desejada verifica se ela é possivel 
+(caso seja o tabuleiro muda se tiver um presente no local se for apenas grama nao muda) e caso seja realiza o movimento e coleta o presente 
+e incrementa sua posição nas capacidades, e é retornado um movimento que é uma tupla que contem o atual tabuleiro e Jogadores
 
 ***********  Ainda Precisa serem implemetatadas: ***********
 
@@ -40,7 +42,8 @@ type Move = (Tabuleiro, Jogadores)
 
 -- ********* Parte de Movimentacao **********
 
--- Decide se move ou nao, recebe como parametro a coordenada atual do personagem e qual a direcao desejada por char, entao tais variaveis sao encaminhadas para outra funcao que ira vefificar se existe conteudo nela ou nao, retornando um Bool
+-- Decide se move ou nao, recebe como parametro a coordenada atual do personagem e qual a direcao desejada por char, 
+-- entao tais variaveis sao encaminhadas para outra funcao que ira vefificar se existe conteudo nela ou nao, retornando um Bool
 
 -- Cria o mapa e os jogadores
 primeiroMovimento :: Move
