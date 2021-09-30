@@ -12,7 +12,7 @@ main = do{
 {-     **************** Bomberman - Etapa 1 ***************
 
 Alunos : Tiago de Paula Alves (12011BCC040)
-         Bruno 
+         Bruno Ferreira Tomé (12011BCC050)  
 
 
 
