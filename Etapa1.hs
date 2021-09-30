@@ -60,10 +60,11 @@ movimenta qJ d (tab, j) =
 
 
 direcao :: Jogador_X -> Char -> (Int,Int)
-direcao (iD,x,y,cap) c  | (c == 'N') =  (x+1, y)  
-                        | (c == 'S') =  (x-1, y) 
-                        | (c == 'L') =  (x, y+1) 
-                        | (c == 'O') =  (x, y-1) 
+direcao (iD,x,y,cap) c  | (c == 'N') && x+1 <= 7 =  (x+1, y)  
+                        | (c == 'S') && x-1 >= 0 =  (x-1, y) 
+                        | (c == 'L') && y+1 <= 7 =  (x, y+1) 
+                        | (c == 'O') && y-1 >= 0 =  (x, y-1) 
+                        | otherwise = error "A coordenada desejada nao é acessivel"
 
 
 -- verifica se mov é possivel recebe a coordenada e o tabuleiro 
