@@ -124,18 +124,18 @@ movimenta qJ d (tab, j) =
       
 
 direcao :: Jogador_X -> Direcao -> (Int,Int)
-direcao (iD,x,y,cap) c  | (c == Norte) && x+1 <= 7 =  (x+1, y)  
-                        | (c == Sul) && x-1 >= 0 =  (x-1, y) 
-                        | (c == Leste) && y+1 <= 7 =  (x, y+1) 
-                        | (c == Oeste) && y-1 >= 0 =  (x, y-1) 
-                        | otherwise = error "A coordenada desejada nao é acessivel"
+direcao (iD,x,y,cap) c  | (c == Norte) && x+1 <= 6 =  (x+1, y)  
+                        | (c == Sul) && x-1 >= 1 =  (x-1, y) 
+                        | (c == Leste) && y+1 <= 6 =  (x, y+1) 
+                        | (c == Oeste) && y-1 >= 1 =  (x, y-1) 
+                        | otherwise = (x,y)
 
 direcaoDobro :: Jogador_X -> Direcao -> (Int,Int)
-direcaoDobro (iD,x,y,cap) c | (c == Norte) && x+2 <= 7 =  (x+2, y)  
-                            | (c == Sul) && x-2 >= 0 =  (x-2, y) 
-                            | (c == Leste) && y+2 <= 7 =  (x, y+2) 
-                            | (c == Oeste) && y-2 >= 0 =  (x, y-2) 
-                            | otherwise = error "A coordenada desejada nao é acessivel"
+direcaoDobro (iD,x,y,cap) c | (c == Norte) && x+2 <= 6 =  (x+2, y)  
+                            | (c == Sul) && x-2 >= 1 =  (x-2, y) 
+                            | (c == Leste) && y+2 <= 6 =  (x, y+2) 
+                            | (c == Oeste) && y-2 >= 1 =  (x, y-2) 
+                            | otherwise = (x,y)
 
 -- verifica se mov possivel recebe a coordenada e o tabuleiro 
 
@@ -162,6 +162,7 @@ verificaLinha y (c0,c1,c2,c3,c4,c5,c6,c7) | y == 0 = (verificaCelula c0)
 verificaCelula :: Celula -> Char
 verificaCelula (_,_,[]) = error "Error. Lista vazia"
 verificaCelula (_,_,[x]) = if x == 'g' then 'g'
+                           else if x == 'v' then 'v'
                            else 'N'
 verificaCelula (_,_,(x:y)) =  if x == 'g' && head y == 'a' then 'a'
                               else if x == 'g' && head y == 'b' then 'b'
@@ -208,6 +209,9 @@ gerarItens x y  | x == 3 && y == 4 = (x,y,['#'])
                 | x == 0 && y < 8 = (x,y,['#'])
                 | x < 8 && y == 7 = (x,y,['#'])
                 | x == 7 && y < 8 = (x,y,['#'])
+                | x == 1 && y == 2 = (x,y,['v'])
+                | x == 4 && y == 3 = (x,y,['v'])
+                | x == 6 && y == 5 = (x,y,['v'])
                 | x == 6 && y == 3 = (x,y,['g','a'])
                 | x == 2 && y == 6 = (x,y,['g','a'])
                 | x == 5 && y == 4 = (x,y,['g','b'])
@@ -215,7 +219,7 @@ gerarItens x y  | x == 3 && y == 4 = (x,y,['#'])
                 | x == 6 && y == 2 = (x,y,['g','b'])
                 | x == 3 && y == 6 = (x,y,['g','c'])
                 | x == 1 && y == 5 = (x,y,['g','b'])
-                | x == 4 && y == 7 = (x,y,['g','c'])
+                | x == 4 && y == 6 = (x,y,['g','c'])
                 | x == 3 && y == 3 = (x,y,['g','c'])
                 | otherwise = (x,y,['g'])
 
@@ -254,7 +258,7 @@ localDisponivel z cap ((x0, y0, c0), (x1, y1, c1), (x2, y2, c2), (x3, y3, c3), (
                                                 | celulaDisponivel c7 == True = (z,x7,y7,cap) 
 
 celulaDisponivel :: Item -> Bool
-celulaDisponivel [] = error "Error. Lista vazia"
+celulaDisponivel [] = False
 celulaDisponivel [x] = if x == 'g' then True
                            else False
 
@@ -318,6 +322,7 @@ mudaCelula (x,y) = (x,y,['g'])
 
 adicionarCapacidade :: Int -> (Int,Int) -> Char -> Jogadores -> Jogadores
 adicionarCapacidade qj (x,y) c (jogador1, jogador2, jogador3, jogador4) 
+                                      | c == 'v' = (explosaoJogador (x,y) (jogador1, jogador2, jogador3, jogador4))
                                       | c == 'a' && qj == 1 = ((qj,x,y,(1,0,0)), jogador2, jogador3, jogador4) 
                                       | c == 'c' && qj == 1 = ((qj,x,y,(0,0,1)), jogador2, jogador3, jogador4)
                                       | c == 'N' && qj == 1 = ((qj,x,y,(0,0,0)), jogador2, jogador3, jogador4) 
