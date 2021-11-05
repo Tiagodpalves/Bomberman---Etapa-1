@@ -18,9 +18,9 @@ Replit: https://replit.com/@Tiagodpa/Etapa-2-Bomberman#main.hs
 
 - Criar o tabuleiro : cria as linhas e as linhas criam as celulas 
 
--Movimentação do Persongem  : pega um personagem (1 a 4) e pega as informações dele 
-assim como a direção desejada verifica se ela é possivel (tabuleiro muda se tiver um presente no local
-se for apenas grama nao muda) e caso seja realiza o movimento e coleta o presente
+-Movimentação do Persongem  : pega um personagem (1 a 4) e suas informações, assim como a direção desejada,
+verifica se ela é possivel (tabuleiro muda se tiver um presente no local se for apenas grama nao muda)
+e caso seja realiza o movimento e coleta o presente
 e incrementa sua posição nas capacidades, e é retornado um movimento que é uma tupla 
 que contem o atual tabuleiro e Jogadores
 
